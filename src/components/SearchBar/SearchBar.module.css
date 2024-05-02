@@ -1,0 +1,29 @@
+.search-form {
+    width: 100%;
+    padding: 5px;
+    background-color: blueviolet;
+}
+
+.search-bar {
+    height: 100%;
+    width: 50%;
+    padding: 10px 12px;
+    background-color: #242424;
+}
+
+.search-bar,
+.search-btn,
+.search-bar:hover,
+.search-bar:focus,
+.search-bar:active {
+    border: transparent;
+    outline: transparent;
+}
+
+
+.search-btn {
+    padding: 0;
+    margin: 0;
+    transform: translate(calc(-100% - 12px), 2px);
+    background-color: transparent;
+}

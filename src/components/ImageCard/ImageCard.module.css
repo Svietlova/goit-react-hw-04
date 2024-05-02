@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s linear;
+}
+
+.img:hover {
+    transform: scale(1.05);
+}
+
+.img-card {
+    background-color: blueviolet;
+    transition: transform 0.5s linear;
+}
+
+.img:hover+.img-card {
+    transform: translateY(-100%);
+}
