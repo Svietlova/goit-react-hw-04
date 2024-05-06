@@ -8,7 +8,7 @@ const Loader = forwardRef(function Loader(props, ref) {
         visible={props.visible}
         height="80"
         width="80"
-        barColor="blueviolet"
+        barColor="#ff9830"
         borderColor="white"
         ariaLabel="progress-bar-loading"
       />

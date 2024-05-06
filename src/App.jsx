@@ -7,7 +7,6 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import Loader from './components/Loader/Loader';
 import ErrorMessage from './components/ErrorMessage/ErrorMessage';
 import ImageModal from './components/ImageModal/ImageModal';
-import Filters from './components/Filters/Filters';
 
 import fetchPhotos from './apiService/unsplashApi';
 import { useInView } from 'react-intersection-observer';
@@ -15,17 +14,10 @@ import { useInView } from 'react-intersection-observer';
 function App() {
   const [query, setQuery] = useState('');
   const [photos, setPhotos] = useState([]);
-  //pagination
 
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(false);
-
-  //filters
-  const [orientation, setOrientation] = useState('');
-  const [color, setColor] = useState('');
-  const [content_filter, setContentFilter] = useState('low');
-  const [order_by, setOrderBy] = useState('relevant');
 
   //modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +25,7 @@ function App() {
   const [imgSrc, setImgSrc] = useState('');
   const [imgAlt, setImgAlt] = useState('');
 
-  // Infinity scroll
+  //infinity scroll
   const { ref, inView } = useInView({
     threshold: 1,
   });
@@ -48,7 +40,7 @@ function App() {
         setLoading(true);
 
         setErr(false);
-        const data = await fetchPhotos(query, page, orientation, color, content_filter, order_by);
+        const data = await fetchPhotos(query, page);
 
         if(parseInt(data.total_pages) === parseInt(page) || parseInt(data.total_pages) === 0 || parseInt(data.total_pages) === 1) {
           setLoading(false);
@@ -66,7 +58,7 @@ function App() {
       }
     }
     callFetchPhotos();
-  }, [query, page, orientation, color, content_filter, order_by]);
+  }, [query, page]);
 
   useEffect(() => {
     if (inView) {
@@ -85,51 +77,15 @@ function App() {
     setIsModalOpen(false);
   }
 
-  function handleResetFilters() {
-    setOrientation('');
-    setColor('');
-    setContentFilter('low');
-    setOrderBy('relevant');
-    setPage(1);
-  }
-
   function handleOpenModal(currImg, currAlt) {
     setImgSrc(currImg);
     setImgAlt(currAlt);
     setIsModalOpen(prev => !prev);
   }
 
-  function handleSetOrientation(evt) {
-    setOrientation(evt.target.value);
-    setPage(1);
-  }
-  function handleSetColor(evt) {
-    setColor(evt.target.value);
-    setPage(1);
-  }
-  function handleSetContentFilter(evt) {
-    setContentFilter(evt.target.value);
-    setPage(1);
-  }
-  function handleSetOrderBy(evt) {
-    setOrderBy(evt.target.value);
-    setPage(1);
-  }
-
   return (
     <>
       <SearchBar changeFilter={changeQuery} />
-      <Filters
-        orientation={orientation}
-        color={color}
-        content_filter={content_filter}
-        order_by={order_by}
-        handleSetOrientation={handleSetOrientation}
-        handleSetColor={handleSetColor}
-        handleSetContentFilter={handleSetContentFilter}
-        handleSetOrderBy={handleSetOrderBy}
-        resetFilters={handleResetFilters}
-      />
 
       {err && <ErrorMessage />}
       {!!photos.length && <ImageGallery photos={photos} openModal={handleOpenModal} />}

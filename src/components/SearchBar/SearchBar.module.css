@@ -1,7 +1,7 @@
 .search-form {
     width: 100%;
     padding: 5px;
-    background-color: blueviolet;
+    background-color: #ff9830;
 }
 
 .search-bar {
@@ -9,6 +9,7 @@
     width: 50%;
     padding: 10px 12px;
     background-color: #242424;
+    color: rgb(239, 205, 168);
 }
 
 .search-bar,
@@ -26,4 +27,5 @@
     margin: 0;
     transform: translate(calc(-100% - 12px), 2px);
     background-color: transparent;
+    color: rgb(239, 205, 168);
 }
